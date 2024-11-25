@@ -1,0 +1,103 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos salten a una nueva línea si es necesario */
+    gap: 15px; /* Espaciado entre los elementos */
+}
+
+form input {
+    flex: 1 1 calc(50% - 15px); /* Toma el 50% del ancho menos el espacio del gap */
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    flex: 1 1 100%; /* Ocupa todo el ancho disponible */
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+/* Botones */
+.buttons {
+    display: flex;
+    flex-wrap: wrap; /* Los botones saltan a la siguiente línea si no hay espacio */
+    gap: 15px; /* Espaciado entre botones */
+}
+
+.buttons button {
+    flex: 1 1 calc(33.33% - 15px); /* Cada botón ocupa un tercio del ancho disponible */
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#guardar { background-color: #28a745; }
+#buscar { background-color: #007bff; }
+#modificar { background-color: #ffc107; }
+#eliminar { background-color: #dc3545; }
+#visualizar { background-color: #17a2b8; }
+#salir { background-color: #6c757d; }
+
+/* Cambia el color de los botones al pasar el ratón */
+.buttons button:hover {
+    opacity: 0.8;
+}
+
+/* Media Query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+    form input {
+        flex: 1 1 100%; /* Ocupa todo el ancho disponible en pantallas pequeñas */
+    }
+
+    .buttons button {
+        flex: 1 1 100%; /* Cada botón ocupa todo el ancho disponible */
+    }
+}
+
+/* Media Query para pantallas muy pequeñas (móviles) */
+@media screen and (max-width: 480px) {
+    form input,
+    form button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .buttons button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}

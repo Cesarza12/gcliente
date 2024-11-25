@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Clientes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Clientes</h1>
+        <form id="formulario" method="POST" action="acciones.php">
+            <input type="hidden" name="id" id="id">
+            <div>
+                <label for="cliente">Cliente:</label>
+                <input type="text" name="cliente" id="cliente" required>
+            </div>
+            <div>
+                <label for="debe">Debe:</label>
+                <input type="number" name="debe" id="debe" step="0.01" required>
+            </div>
+            <div>
+                <label for="fecha">Fecha:</label>
+                <input type="date" name="fecha" id="fecha" required>
+            </div>
+            <div class="buttons">
+                <button type="submit" name="accion" value="guardar" class="btn btn-guardar">Guardar</button>
+                <button type="button" id="buscar" class="btn btn-buscar">Buscar</button>
+                <button type="button" id="modificar" class="btn btn-modificar">Modificar</button>
+                <button type="button" id="eliminar" class="btn btn-eliminar">Eliminar</button>
+                <button type="button" id="visualizar" class="btn btn-visualizar">Visualizar Todo</button>
+                 <!-- Nuevo botón de Salir -->
+                <button type="button" id="salir" class="btn btn-salir">Salir</button>
+                <button class="button button-eliminar" id="eliminarTodo">Eliminar Todo</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Scripts para manejar redirecciones -->
+    <script>
+        // Botón Buscar
+        document.getElementById('buscar').addEventListener('click', function () {
+            const cliente = prompt("¿A quién desea buscar?");
+            if (cliente) {
+                window.location.href = `buscar.php?cliente=${encodeURIComponent(cliente)}`;
+            }
+        });
+
+        // Botón Modificar
+        document.getElementById('modificar').addEventListener('click', function () {
+            const cliente = prompt("¿A quién desea modificar?");
+            if (cliente) {
+                window.location.href = `modificar.php?cliente=${encodeURIComponent(cliente)}`;
+            }
+        });
+
+        // Botón Eliminar
+        document.getElementById('eliminar').addEventListener('click', function () {
+            const cliente = prompt("¿A quién desea eliminar?");
+            if (cliente) {
+                if (confirm(`¿Está seguro de que desea eliminar al cliente "${cliente}"?`)) {
+                    window.location.href = `eliminar.php?cliente=${encodeURIComponent(cliente)}`;
+                }
+            }
+        });
+
+        // Redirigir a la página de visualización
+    document.getElementById('visualizar').addEventListener('click', function () {
+        window.location.href = 'visualizar.php';
+    });
+
+
+    // Botón Salir
+    document.getElementById('salir').addEventListener('click', function () {
+        if (confirm("¿Está seguro de que desea salir de la aplicación?")) {
+            window.location.href = 'logout.php';
+        }
+    });
+
+    // Función para enviar la solicitud al PHP para eliminar todos los registros
+    document.getElementById('eliminarTodo').addEventListener('click', function() {
+      if (confirm("¿Estás seguro de que deseas eliminar todos los registros? Esta acción no se puede deshacer.")) {
+        // Hacemos una solicitud AJAX al archivo PHP para eliminar todo
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "eliminar_todo.php", true);
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            alert(xhr.responseText);  // Mostrar el mensaje del PHP
+            actualizarTabla();        // Actualizar la tabla de registros
+          }
+        };
+        xhr.send();
+      }
+    });
+    
+    </script>
+
+</body>
+</html>
